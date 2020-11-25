@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import { addTodo } from "../redux/actions"
+import { getTodos } from "../redux/selectors"
 
 class AddTodo extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class AddTodo extends React.Component {
   }
 
   handleAddTodo = () => {
+    console.log(this.props)
     // dispatches actions to add todo
     this.props.addTodo(this.state.input)
 
@@ -36,7 +38,6 @@ class AddTodo extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { addTodo }
-)(AddTodo)
+export default connect(state => ({
+  todos: getTodos(state)
+}), { addTodo })(AddTodo)
